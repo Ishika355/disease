@@ -1,0 +1,89 @@
+{% extends 'base.html' %}  <!-- Extend the 'base.html' template -->
+
+{% block content %}  <!-- Define the content block to override -->
+
+<style>
+    .ok{
+        color: green;
+        font-size: 50px;
+    }
+</style>
+
+<div class="container">
+    <div class="display-4 my-2 text-center"><strong  class="ok"> Disease Predictor - Heart and Diabetes </strong> <br> Diabetes Disease Prediction</div>
+    <hr />
+
+    {% if context %}  <!-- Check if 'context' variable exists -->
+    <div class="h1 my-2 text-center">
+        You {{ context }} diabetes disease.
+    </div>
+    {% endif %}
+
+ <div class="row">
+        <div class="col-md-4">
+            <form class="" method="POST" action="{% url 'diabetes' %}">  <!-- Form to submit user data to 'diabetes' view -->
+                {% csrf_token %}  <!-- Add CSRF token for form submission security -->
+                {{ form.as_p }}
+                <div class="mt-4">
+                    <button type="submit" class="btn-lg btn-block btn btn-outline-danger mb-5">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+ <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Dataset Description
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                           <tr>
+                                <td>gender</td>
+                                <td>Gender refers to the biological sex of the individual, which can have an impact on their susceptibility to diabetes. There are three categories in it: male, female, and other.</td>
+                            </tr>
+                            <tr>
+                                <td>age</td>
+                                <td>Age is an important factor as diabetes is more commonly diagnosed in older adults. Age ranges from 0-80 in our dataset.</td>
+                            </tr>
+                            <tr>
+                                <td>hypertension</td>
+                                <td>Hypertension is a medical condition in which the blood pressure in the arteries is persistently elevated. It has values of 0 or 1 where 0 indicates they don’t have hypertension and for 1, it means they have hypertension.</td>
+                            </tr>
+                            <tr>
+                                <td>heart_disease</td>
+                                <td>Heart disease is another medical condition that is associated with an increased risk of developing diabetes. It has values of 0 or 1 where 0 indicates they don’t have heart disease and for 1, it means they have heart disease.</td>
+                            </tr>
+                            <tr>
+                                <td>smoking_history</td>
+                                <td>Smoking history is also considered a risk factor for diabetes and can exacerbate the complications associated with diabetes. In our dataset, we have 5 categories: not current, former, No Info, current, never, and ever.</td>
+                            </tr>
+                            <tr>
+                                <td>bmi</td>
+                                <td>BMI (Body Mass Index) is a measure of body fat based on weight and height. Higher BMI values are linked to a higher risk of diabetes. The range of BMI in the dataset is from 10.16 to 71.55. BMI less than 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, and 30 or more is obese.</td>
+                            </tr>
+                            <tr>
+                                <td>HbA1c_level</td>
+                                <td>HbA1c (Hemoglobin A1c) level is a measure of a person's average blood sugar level over the past 2-3 months. Higher levels indicate a greater risk of developing diabetes. Mostly more than 6.5% of HbA1c Level indicates diabetes.</td>
+                            </tr>
+                            <tr>
+                                <td>blood_glucose_level</td>
+                                <td>Blood glucose level refers to the amount of glucose in the bloodstream at a given time. High blood glucose levels are a key indicator of diabetes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+ </div>
+ </div>
+</div>
+{% endblock %}  <!-- End of content block -->
